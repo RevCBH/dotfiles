@@ -2,3 +2,10 @@
 *.swo
 *.un~
 .floo
+
+.cache
+.project
+.classpath
+.settings/
+.history
+bin/
