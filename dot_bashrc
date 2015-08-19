@@ -1,0 +1,11 @@
+alias gs="git status"
+alias gd="git diff"
+alias g="git"
+
+export DOCKER_VM_NAME=dev
+alias d="docker"
+alias dm="docker-machine"
+alias dc="docker-compose"
+function use-dm() {
+  eval "$(docker-machine env "${1-$DOCKER_VM_NAME}")"
+}
