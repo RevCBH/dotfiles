@@ -1,6 +1,9 @@
 alias gs="git status"
 alias gd="git diff"
 alias g="git"
+alias co="git checkout"
+alias gb="git branch"
+alias glga="git log --graph --abbrev-commit --date=short --pretty=format:'%C(yellow)%h%Creset %C(bold blue)(%an)%Creset%C(yellow)%d%Creset %s %Cgreen<%cr, %ar>%Creset'"
 
 export DOCKER_VM_NAME=dev
 alias d="docker"
@@ -9,3 +12,23 @@ alias dc="docker-compose"
 function use-dm() {
   eval "$(docker-machine env "${1-$DOCKER_VM_NAME}")"
 }
+
+function dm-mount {
+  docker-machine ssh "${1-$DOCKER_VM_NAME}" "sudo mkdir -p /Volumes/git; sudo mount -t vboxsf /Volumes/git /Volumes/git"
+}
+
+function docker-squash {
+  local image=$1
+  local tag=${2-latest}
+  local newtag=${3-$tag-flat}
+
+  if [ -z "$image" ]; then
+    echo "No image specified!"
+    return 1
+  fi
+
+  local container=$(docker run -d "$image:$tag" ls)
+  docker export $container | docker import - "$image:$newtag" > /dev/null
+  docker rm "$container" > /dev/null
+}
+
