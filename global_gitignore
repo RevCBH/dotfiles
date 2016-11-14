@@ -2,6 +2,8 @@
 *.swo
 *.swn
 *.un~
+*.ipr
+*.iws
 .floo
 
 .cache

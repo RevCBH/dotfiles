@@ -20,7 +20,10 @@ function dm-mount {
 function docker-squash {
   local image=$1
   local tag=${2-latest}
-  local newtag=${3-$tag-flat}
+  local newtag=$3
+  if [ -z "$newtag" ]; then
+    newtag="$tag"-flat
+  fi
 
   if [ -z "$image" ]; then
     echo "No image specified!"
@@ -31,4 +34,5 @@ function docker-squash {
   docker export $container | docker import - "$image:$newtag" > /dev/null
   docker rm "$container" > /dev/null
 }
+
 
