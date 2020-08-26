@@ -1,23 +1,29 @@
 #!/usr/bin/env bash
 
-pushd .vim > /dev/null
-/usr/bin/env bash setup.sh
-popd > /dev/null
+mkdir -p ~/.bash_completion.d
+curl https://raw.githubusercontent.com/cykerway/complete-alias/master/complete_alias \
+      > ~/.bash_completion.d/complete_alias
+
+
+
+# pushd .vim > /dev/null
+# /usr/bin/env bash setup.sh
+# popd > /dev/null
 
 git config --global core.excludesfile `pwd`/global_gitignore
 
-if [ -f ~/.bashrc ]; then
-  echo $'\e[1;4;33mWARNING\e[0m -' "$HOME/.bashrc already exists."
+if [ -f ~/.bash_profile ]; then
+  echo $'\e[1;4;33mWARNING\e[0m -' "$HOME/.bash_profile already exists."
   read -p "[s]kip, [r]eplace, or [a]ppend? [s]: " -n 1 wutdo
   echo ""
 
   if [[ "$wutdo" == "r" ]]; then
-    cp dot_bashrc ~/.bashrc
+    cp dot_bash_profile ~/.bash_profile
   elif [[ "$wutdo" == "a" ]]; then
-    cat dot_bashrc >> ~/.bashrc
+    cat dot_bash_profile >> ~/.bash_profile
   fi
 else
-  cp dot_bashrc ~/.bashrc
+  cp dot_bash_profile ~/.bash_profile
 fi
 
 #if [ -e ~/.gvimrc ]; then

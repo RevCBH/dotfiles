@@ -1,0 +1,21 @@
+source ~/.bash_completion.d/complete_alias
+
+alias gs="git status"
+complete -F _complete_alias gs
+
+alias gd="git diff"
+complete -F _complete_alias gd
+
+alias g="git"
+complete -F _complete_alias g
+
+alias co="git checkout"
+complete -F _complete_alias co
+
+alias gb="git branch"
+complete -F _complete_alias gb
+
+alias glga="git log --graph --abbrev-commit --date=short --pretty=format:'%C(yellow)%h%Creset %C(bold blue)(%an)%Creset%C(yellow)%d%Creset %s %Cgreen<%cr, %ar>%Creset'"
+
+alias dc="docker-compose"
+complete -F _complete_alias dc
