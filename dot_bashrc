@@ -35,4 +35,5 @@ function docker-squash {
   docker rm "$container" > /dev/null
 }
 
-
+source ~/source/dotfiles/kube-ps1.sh
+PS1='[\u@\h \W $(kube_ps1)]\$ '

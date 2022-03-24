@@ -12,5 +12,6 @@
 .settings/
 .history
 bin/
+.vscode/
 
 .DS_Store
